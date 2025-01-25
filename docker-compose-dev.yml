@@ -1,0 +1,26 @@
+services:
+  Api_consultaNit:
+    build: .
+    ports:
+      - "${SERVER_PORT}:3000"
+    environment:
+      - NODE_ENV=development
+      - DEBUG=true
+    volumes:
+      - ./src:/usr/src/app 
+    depends_on:
+      - api_db
+
+  api_db:
+    image: postgres:17 
+    ports:
+      - "${DB_PORT}:5432" 
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db_dev_data:/var/lib/postgresql/data 
+
+volumes:
+  db_dev_data: 

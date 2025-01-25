@@ -1,0 +1,13 @@
+FROM node:22.13
+
+WORKDIR /home/dev/api
+
+COPY . /home/dev/api/
+
+RUN npm install -g pnpm
+
+RUN pnpm install
+
+EXPOSE 3001
+
+CMD [ "pnpm", "start:dev" ]
