@@ -16,7 +16,7 @@ const schema = joi
   .object({
     SERVER_PORT: joi.number().required(),
     SERVER_HOST: joi.string().trim().required(),
-    DB_NAME: joi.number().required(),
+    DB_NAME: joi.string().required(),
     DB_USER: joi.string().trim().required(),
     DB_PASSWORD: joi.string().trim().required(),
     DB_HOST: joi.string().trim().required(),
