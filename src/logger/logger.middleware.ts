@@ -1,10 +1,17 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
+import * as morgan from 'morgan';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-  use(req: Request, res: Response, next: () => void) {
-    console.log(req.originalUrl);
-    next();
+  private readonly morganMiddleware: ReturnType<typeof morgan>;
+
+  constructor() {
+    // Configura Morgan con el formato deseado
+    this.morganMiddleware = morgan('dev');
+  }
+
+  use(req: Request, res: Response, next: NextFunction): void {
+    this.morganMiddleware(req, res, next);
   }
 }
