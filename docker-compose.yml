@@ -1,6 +1,8 @@
 services: 
-  Api_consultaNit:
-    build: .
+  api_consultanit_prod:
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports: 
       - "${SERVER_PORT}:3000"
     environment:
