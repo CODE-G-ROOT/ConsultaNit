@@ -8,7 +8,7 @@ export class LoggerMiddleware implements NestMiddleware {
 
   constructor() {
     // Configura Morgan con el formato deseado
-    this.morganMiddleware = morgan('dev');
+    this.morganMiddleware = morgan('combined');
   }
 
   use(req: Request, res: Response, next: NextFunction): void {
