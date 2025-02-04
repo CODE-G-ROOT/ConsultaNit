@@ -9,7 +9,9 @@ interface Envs {
   DB_PASSWORD: string;
   DB_HOST: string;
   DB_PORT: string;
-  DATABASE_URL: string;
+  CONSULTANIT_HOST: string;
+  CONSULTANIT_PORT: number;
+  CONSULTANIT_CMD: string;
 }
 
 const schema = joi
@@ -21,7 +23,9 @@ const schema = joi
     DB_PASSWORD: joi.string().trim().required(),
     DB_HOST: joi.string().trim().required(),
     DB_PORT: joi.string().trim().required(),
-    DATABASE_URL: joi.string().trim().required(),
+    CONSULTANIT_HOST: joi.string().required(),
+    CONSULTANIT_PORT: joi.number().required(),
+    CONSULTANIT_CMD: joi.string().required(),
   })
   .unknown(true);
 
@@ -39,5 +43,7 @@ export const {
   DB_PASSWORD,
   DB_HOST,
   DB_PORT,
-  DATABASE_URL,
+  CONSULTANIT_HOST,
+  CONSULTANIT_PORT,
+  CONSULTANIT_CMD,
 } = data.value as Envs;

@@ -8,21 +8,36 @@ services:
     environment:
       - NODE_ENV=development
       - DEBUG=true
-    volumes:
-      - ./src:/usr/src/app 
     depends_on:
-      - api_db
+      - pgamin
 
-  api_db:
-    image: postgres:17 
+  consultaNIT_db:
+    image: postgres:17
+    container_name: db_dev_container
+    restart: always
     ports:
       - "${DB_PORT}:5432" 
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_DB: ${DB_USER_EMAIL}
+      POSTGRES_USER: ${DB_PASSWORD}
+      POSTGRES_PASSWORD: ${DB_PORT}
     volumes:
-      - db_dev_data:/var/lib/postgresql/data 
+      - db_dev:/var/lib/postgresql/data
+  
+  pgamin:
+    image: dpage/pgadmin4
+    container_name: ${DB_NAME}     
+    restart: always
+    ports:
+      - "${PGADMIN_LISTEN_PORT_DEV}:81" 
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${DB_USER_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+      PGADMIN_LISTEN_PORT: 81
+    volumes:
+      - db_dev:/var/lib/pgadmin
+    depends_on:
+      - consultaNIT_db
 
 volumes:
-  db_dev_data: 
+  db_dev:

@@ -6,18 +6,27 @@ import {
   Patch,
   Param,
   Delete,
+  Inject,
 } from '@nestjs/common';
 import { NitsService } from './nits.service';
-import { CreateNitDto } from './dto/create-nit.dto';
-import { UpdateNitDto } from './dto/update-nit.dto';
+import { CONSULTANIT_CMD } from 'src/config';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('nits')
 export class NitsController {
-  constructor(private readonly nitsService: NitsService) {}
+  constructor(
+    @Inject(CONSULTANIT_CMD) private readonly consultaNitsClient: ClientProxy,
+    private readonly nitsService: NitsService,
+  ) {}
 
-  @Post('/create')
-  create(@Body() body: CreateNitDto) {
-    return this.nitsService.create(body);
+  @Post('/getNit')
+  getNit(@Body() cc: string) {
+    return this.nitsService.findNit(cc);
+  }
+
+  @Post('/getNits')
+  getNits(@Body() cc: string) {
+    return this.nitsService.findNit(cc);
   }
 
   @Get()
@@ -26,13 +35,13 @@ export class NitsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.nitsService.findOne(+id);
+  findOne() {
+    return 'get all nits';
   }
 
   @Patch('/update/:id')
-  update(@Param('id') id: string, @Body() updateNitDto: UpdateNitDto) {
-    return this.nitsService.update(+id, updateNitDto);
+  update(@Param('id') id: string) {
+    return this.nitsService.update(id);
   }
 
   @Delete('/delete/:id')
