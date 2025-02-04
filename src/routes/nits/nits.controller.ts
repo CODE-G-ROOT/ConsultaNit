@@ -20,8 +20,12 @@ export class NitsController {
   ) {}
 
   @Post('/getNit')
-  getNit(@Body() cc: string) {
-    return this.nitsService.findNit(cc);
+  getNit(@Body() body: { cc: string }) {
+    console.log(`Enviando solicitud al microservicio con CC: ${body.cc}`);
+    return this.consultaNitsClient.send(
+      { cmd: CONSULTANIT_CMD },
+      { cc: body.cc },
+    );
   }
 
   @Post('/getNits')
