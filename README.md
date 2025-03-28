@@ -2,6 +2,9 @@
 
 Proyecto destinado a facilitar las consultas de los NITs (Número de Identificación Tributaria) de la DIAN (Dirección de Impuestos y Aduanas Nacionales de Colombia). Este proyecto busca hacer la vida de los contadores más fácil al ofrecer una plataforma donde se pueden consultar los NITs de manera rápida y sencilla.
 
+> **Este repositorio ya no funciona correctamente**
+| Motivo: La Dian ha realizado un cambio que ha vuelto inutil la funcionalidad de este programa.
+
 ## Descripción
 
 Este proyecto no consume ninguna API oficial de la DIAN. Dado a que la DIAN no proporciona una fuente pública para el fácil acceso de datos, se recurre a la acción de contribuir al crecimiento de datos por medio de la inserción de información proporcionada por la comunidad.
